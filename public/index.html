@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sgnf.ai</title>
+<meta name="description" content="sgnf.ai. Signal in the noise.">
+<meta property="og:title" content="sgnf.ai">
+<meta property="og:description" content="Signal in the noise.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./style.css">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+</head>
+<body>
+
+<header class="bar">
+  <span class="wordmark">sgnf.ai</span>
+  <nav class="bar__nav">
+    <a href="#signa">Signa</a>
+    <a href="#principia">Principia</a>
+    <a href="mailto:hello@sgnf.ai" class="btn btn--primary">Scribe nobis</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero__text">
+    <p class="label">Signum in strepitu</p>
+    <h1 class="display">Unum signum<br>inter mille strepitus.</h1>
+    <p class="lede">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Custodimus telam totam, ut tu solum id videas quod vere refert.</p>
+    <div class="hero__actions">
+      <a href="mailto:hello@sgnf.ai" class="btn btn--primary">Incipe custodiam</a>
+      <a href="#signa" class="btn btn--ghost">Vide exempla</a>
+    </div>
+  </div>
+  <svg class="hero__art" viewBox="0 0 480 320" aria-hidden="true">
+    <g class="noise" id="noise"></g>
+    <circle class="pulse" cx="96" cy="176" r="8"/>
+    <rect class="f-signal" x="176" y="0" width="160" height="224" rx="2"/>
+    <rect class="f-alert" x="176" y="224" width="64" height="64" rx="2"/>
+    <rect class="f-ink" x="336" y="0" width="144" height="128" rx="2"/>
+    <rect class="f-tint" x="336" y="128" width="144" height="192" rx="2"/>
+  </svg>
+</section>
+
+<section id="signa" class="section">
+  <div class="section__head">
+    <h2 class="h1">Signa hodierna</h2>
+    <span class="data muted">17.x.2026 &middot; 09:00 &ndash; 16:30</span>
+  </div>
+
+  <div class="banner" role="status">
+    <span class="badge badge--alert">Novum</span>
+    <p><strong>3 novi raptores in /pretia</strong> ab hora nona. Fons: <span class="data">185.220.101.4</span>. Proximum: obstrue aut inspice.</p>
+  </div>
+
+  <div class="table-wrap">
+  <table class="table">
+    <thead>
+      <tr><th>Tempus</th><th>Fons</th><th>Via</th><th>Petitiones</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr class="row--alert"><td class="data">09:14:07</td><td class="data">185.220.101.4</td><td class="data">/pretia</td><td class="data">4.812</td><td><span class="badge badge--alert">Attende</span></td></tr>
+      <tr><td class="data">10:02:51</td><td class="data">66.249.66.1</td><td class="data">/</td><td class="data">212</td><td><span class="badge badge--signal">Verificatum</span></td></tr>
+      <tr><td class="data">11:37:20</td><td class="data">40.77.167.12</td><td class="data">/de-nobis</td><td class="data">96</td><td><span class="badge badge--signal">Verificatum</span></td></tr>
+      <tr><td class="data">13:45:02</td><td class="data">23.106.56.9</td><td class="data">/catalogus</td><td class="data">1.006</td><td><span class="badge">Observatur</span></td></tr>
+      <tr><td class="data">16:21:44</td><td class="data">104.28.0.17</td><td class="data">/pretia</td><td class="data">58</td><td><span class="badge badge--signal">Tractatum</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="principia" class="section">
+  <h2 class="h1">Principia</h2>
+  <div class="grid">
+    <article class="card">
+      <p class="label">I &middot; Primum inventum</p>
+      <h3 class="h2">Res ante verba</h3>
+      <p>Primo quid acciderit, deinde ubi, postremo quid faciendum sit. Numeri, fontes, tempora; adiectiva rara.</p>
+    </article>
+    <article class="card">
+      <p class="label">II &middot; Color parcus</p>
+      <h3 class="h2">Si omnia ardent, nihil ardet</h3>
+      <p>Viridis signum est et actio prima. Aurantius solum ad id quod nunc hominis curam postulat.</p>
+    </article>
+    <article class="card">
+      <p class="label">III &middot; Testimonium</p>
+      <h3 class="h2">Litterae aequales, non opiniones</h3>
+      <p>Inscriptiones, agentes, viae et numeri semper litteris aequalibus scribuntur. Sic probatio apparet.</p>
+    </article>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <span class="wordmark wordmark--sm">sgnf.ai</span>
+  <span class="small muted">Quis custodiet ipsos custodes? Nos.</span>
+  <a href="mailto:hello@sgnf.ai" class="data">hello@sgnf.ai</a>
+</footer>
+
+<script>
+  // dot-grid "noise" behind the hero; one dot is replaced by the pulsing alert disc
+  (function () {
+    var g = document.getElementById('noise'), ns = 'http://www.w3.org/2000/svg';
+    for (var x = 16; x <= 160; x += 32) for (var y = 16; y <= 304; y += 32) {
+      if (x === 96 && y === 176) continue;
+      var c = document.createElementNS(ns, 'circle');
+      c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 2);
+      g.appendChild(c);
+    }
+  })();
+</script>
+</body>
+</html>
