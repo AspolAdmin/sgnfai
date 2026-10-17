@@ -18,4 +18,5 @@ Claude Code (edit locally) -> GitHub `AspolAdmin/sgnfai` (public, branch `main`)
 - Sister project set up the same way: ../inyosi
 
 ## Status / notes
-- 2026-10-17: scaffolded. Zone had no DNS records before setup.
+- 2026-10-17: first deploy via Cloudflare API (MCP): Worker `sgnfai` + custom domains sgnf.ai, www.sgnf.ai. Zone had no DNS records before setup, so nothing removed.
+- Workers Builds not yet connected to the repo (dashboard step, done by the user); until then pushes do not deploy.
