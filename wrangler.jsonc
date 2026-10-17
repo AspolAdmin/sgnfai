@@ -5,6 +5,8 @@
   "assets": { "directory": "./public" },
   "routes": [
     { "pattern": "sgnf.ai", "custom_domain": true },
-    { "pattern": "www.sgnf.ai", "custom_domain": true }
+    { "pattern": "www.sgnf.ai", "custom_domain": true },
+    { "pattern": "sgnfy.ai", "custom_domain": true },
+    { "pattern": "www.sgnfy.ai", "custom_domain": true }
   ]
 }
