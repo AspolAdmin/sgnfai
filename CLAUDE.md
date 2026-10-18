@@ -24,3 +24,4 @@ Claude Code (edit locally) -> GitHub `AspolAdmin/sgnfai` (public, branch `main`)
 - Workers Builds connected 2026-10-17; verified a push to main deploys in ~40s.
 - sgnfy.ai + www.sgnfy.ai added 2026-10-17 as extra custom domains on the same Worker (zone had no DNS records).
 - 2026-10-19: site reworked to the Perplexity Sgnfai direction. User asked for it very simple: one screen with the animated logo, tagline, description and email, a faint dot grid and blue bars top and bottom. No nav, sections or imagery.
+- 2026-10-19: GitHub CLI (gh) installed via Homebrew and signed in; git pushes over HTTPS use its credentials (from the sandboxed Bash tool, pushing may need the sandbox disabled).
