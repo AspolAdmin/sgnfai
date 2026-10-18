@@ -8,6 +8,7 @@
   --ink-muted: #555555;
   --grid: #ececec;
   --blue: #153894; /* sampled from the Discography sleeve band (Wikipedia scan, median of band pixels) */
+  --blue-glow: color-mix(in srgb, var(--blue), var(--white)); /* derived: blue lifted for dark backgrounds */
 
   --font-sans: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -110,3 +111,18 @@ a { color: inherit; text-decoration: none; }
   font-size: 12px; color: #8a8a8a;
 }
 @media (max-width: 640px) { .copyright { right: 16px; bottom: 12px; } }
+
+/* animated background (signal-bg.js): canvas sits at z-index 0, page content above it */
+.signal-bg-on body { background-image: none; }
+.signal-bg-on .strip, .signal-bg-on .stage { position: relative; z-index: 1; }
+.signal-bg-on .copyright { z-index: 1; }
+
+/* dark theme: brand near-black field, white type, blue lifted so it reads on dark */
+.signal-bg--dark body { background-color: var(--ink); color: var(--white); }
+.signal-bg--dark .dict, .signal-bg--dark .lede { color: rgba(255, 255, 255, 0.7); }
+.signal-bg--dark .dict b { color: var(--white); }
+.signal-bg--dark .dict__ipa { color: var(--blue-glow); }
+.signal-bg--dark .tagline span { border-color: rgba(255, 255, 255, 0.45); }
+.signal-bg--dark .logo .logo__cursor { background: var(--blue-glow); }
+.signal-bg--dark .copyright { color: rgba(255, 255, 255, 0.45); }
+.signal-bg--dark :focus-visible { outline-color: var(--blue-glow); }

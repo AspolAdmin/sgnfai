@@ -6,7 +6,8 @@ Static home page for Sgnfai (display wordmark "Sgnf.ai", pronounced SIG-nuh-fy).
 Claude Code (edit locally) -> GitHub `AspolAdmin/sgnfai` (public, branch `main`) -> Cloudflare Workers Builds (connect the repo in the dashboard; builds on every push to main) -> Cloudflare Worker `sgnfai` (static assets from `public/`) -> custom domains sgnf.ai, www.sgnf.ai, sgnfy.ai, www.sgnfy.ai (see `wrangler.jsonc`).
 
 ## Layout
-- `public/` – the site (index.html, style.css, favicon.svg)
+- `public/` – the site (index.html, style.css, favicon.svg, signal-bg.js)
+- `public/signal-bg.js` – animated canvas background (noise + circuit pulses); all tunables in CONFIG at the top, `theme: 'dark' | 'light'`. It adds `signal-bg--dark/light` to <html>; theme overrides live at the end of style.css.
 - `.claude/launch.json` – local preview: `python3 -m http.server 8787 -d public`
 - `wrangler.jsonc` – Worker name, assets dir, custom domains
 
@@ -25,3 +26,4 @@ Claude Code (edit locally) -> GitHub `AspolAdmin/sgnfai` (public, branch `main`)
 - sgnfy.ai + www.sgnfy.ai added 2026-10-17 as extra custom domains on the same Worker (zone had no DNS records).
 - 2026-10-19: site reworked to the Perplexity Sgnfai direction. User asked for it very simple: one screen with the animated logo, tagline, description and email, a faint dot grid and blue bars top and bottom. No nav, sections or imagery.
 - 2026-10-19: GitHub CLI (gh) installed via Homebrew and signed in; git pushes over HTTPS use its credentials (from the sandboxed Bash tool, pushing may need the sandbox disabled).
+- 2026-10-19: added the signal-from-noise canvas background, dark theme (brand near-black field, white type, pulses in --blue mixed with white).
