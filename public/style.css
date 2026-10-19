@@ -112,6 +112,17 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 640px) { .copyright { right: 16px; bottom: 12px; } }
 
+/* look-and-feel prototype switcher, bottom-left (/1/, /2/, /3/) */
+.protos {
+  position: fixed; left: 32px; bottom: 12px; z-index: 1;
+  display: flex; gap: 10px; font: 600 13px/1 var(--font-mono); color: #8a8a8a;
+}
+.protos a { padding: 4px 2px; }
+.protos a:hover { color: var(--ink); }
+.signal-bg--dark .protos { color: rgba(255, 255, 255, 0.45); }
+.signal-bg--dark .protos a:hover { color: var(--white); }
+@media (max-width: 640px) { .protos { left: 16px; bottom: 8px; } }
+
 /* animated background (signal-bg.js): canvas sits at z-index 0, page content above it */
 .signal-bg-on body { background-image: none; }
 .signal-bg-on .strip, .signal-bg-on .stage { position: relative; z-index: 1; }

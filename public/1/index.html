@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sgnfai · Prototype 1</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/proto.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+  /* Prototype 1: the product as the hero. Raw events in, classified, delivered over MCP / API. */
+  .p1 { flex: 1; width: 100%; max-width: 1360px; margin: 0 auto; padding: 56px var(--gutter) 32px; }
+
+  .p1-hero {
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 28px 64px; align-items: end; margin-bottom: 48px;
+  }
+  .p1-hero .logo { font-size: clamp(56px, 9vw, 128px); }
+  .p1-hero .tagline { margin-top: 18px; font-size: clamp(17px, 1.75vw, 26px); }
+  .p1-hero .lede { font-size: 19px; line-height: 1.5; color: var(--ink-muted); max-width: 44ch; margin-bottom: 24px; }
+  .p1-hero .lede b { color: var(--ink); font-weight: 600; }
+  @media (max-width: 900px) { .p1-hero { grid-template-columns: 1fr; } }
+
+  /* the pipeline panel */
+  .pipe { border: 1px solid var(--ink); display: grid; grid-template-columns: 1fr 1fr 1.15fr; }
+  .stage + .stage { border-left: 1px solid var(--ink); }
+  .stage__head {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    padding: 12px 16px; border-bottom: 1px solid var(--ink);
+  }
+  .stage__head span:last-child { color: var(--ink-muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .stage__body {
+    height: 330px; overflow: hidden; position: relative;
+    -webkit-mask-image: linear-gradient(#000 75%, transparent); mask-image: linear-gradient(#000 75%, transparent);
+  }
+  .stage__body ul { list-style: none; }
+  @media (max-width: 900px) {
+    .pipe { grid-template-columns: 1fr; }
+    .stage + .stage { border-left: 0; border-top: 1px solid var(--ink); }
+    .stage__body { height: 220px; }
+    .stage--out .stage__body { height: 300px; }
+  }
+
+  .ev { padding: 10px 16px; border-bottom: 1px solid var(--rule); animation: drop-in 0.45s ease both; }
+  .no-anim .ev, .no-anim .json { animation: none; }
+  .ev__meta span { white-space: nowrap; }
+  .ev__meta { display: flex; flex-wrap: wrap; gap: 0 10px; font: 12px/1.3 var(--font-mono); color: var(--ink-muted); }
+  .ev__text { font-size: 14px; line-height: 1.35; margin-top: 3px; }
+  .ev--hot { box-shadow: inset 3px 0 var(--blue); }
+  .ev--noise .ev__text { color: #a0a0a0; text-decoration: line-through; }
+  .ev__drop { margin-left: auto; color: #a0a0a0; }
+  .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 7px; }
+  .chip { font: 600 11px/1 var(--font-mono); padding: 4px 6px; border: 1px solid var(--ink); text-transform: uppercase; letter-spacing: 0.04em; }
+  .chip--cat { background: var(--blue); border-color: var(--blue); color: var(--white); }
+  .conf { font: 12px/1 var(--font-mono); color: var(--blue); margin-left: 2px; }
+  @keyframes drop-in { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+
+  .json { padding: 14px 16px; font: 12.5px/1.65 var(--font-mono); white-space: pre-wrap; word-break: break-word; animation: fade 0.5s ease both; }
+  .json .c { color: #8a8a8a; }
+  .json .k { color: var(--ink); }
+  .json .s { color: var(--blue); }
+  .json .n { color: var(--blue); font-weight: 700; }
+  .json .v { color: var(--ink); font-weight: 700; }
+  @keyframes fade { from { opacity: 0.2; } to { opacity: 1; } }
+
+  .pipe-note { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 12px; font: 12px/1.4 var(--font-mono); color: var(--ink-muted); }
+  .live::before { content: ""; display: inline-block; width: 7px; height: 7px; background: var(--blue); margin-right: 8px; animation: blink 1.2s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="bar__logo" href="/">Sgnfai</a>
+  <a class="btn btn--light btn--sm" href="mailto:hello@sgnf.ai?subject=Request%20access">Request access</a>
+</header>
+
+<main class="p1">
+  <section class="p1-hero">
+    <div>
+      <div class="logo" data-type-logo data-autoplay role="img" aria-label="Sgnfai"><span class="logo__word" aria-hidden="true">Sgnfai</span><span class="logo__cursor" aria-hidden="true"></span></div>
+      <h1 class="tagline"><span>Our tools.</span><span>Your intelligence.</span><span>Their advantage.</span></h1>
+    </div>
+    <div>
+      <p class="lede">Industrial-strength web collection that <b>detects every alert</b>, classifies and synthesises it, and <b>delivers it straight into your data product</b> via API or MCP.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:hello@sgnf.ai?subject=Request%20access">Request access</a>
+        <a class="textlink" href="mailto:hello@sgnf.ai?subject=Technical%20call">Book a technical call</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pipe" aria-label="How Sgnfai works, shown with sample data">
+    <div class="stage">
+      <div class="stage__head mono-label"><span>01 Ingest</span><span>raw alerts</span></div>
+      <div class="stage__body"><ul id="in"></ul></div>
+    </div>
+    <div class="stage">
+      <div class="stage__head mono-label"><span>02 Classify</span><span>de-duplicated, tagged</span></div>
+      <div class="stage__body"><ul id="cls"></ul></div>
+    </div>
+    <div class="stage stage--out">
+      <div class="stage__head mono-label"><span>03 Deliver</span><span id="proto">MCP</span></div>
+      <div class="stage__body" id="out"></div>
+    </div>
+  </section>
+  <p class="pipe-note"><span class="live">Live sample</span><span>Illustrative pipeline. Companies and events are fictional.</span></p>
+</main>
+
+<footer class="foot">
+  <nav class="foot__nav" aria-label="Prototypes"><a href="/1/" aria-current="page">1</a><span>|</span><a href="/2/">2</a><span>|</span><a href="/3/">3</a></nav>
+  <span>&copy; 2026 Sgnfai</span>
+</footer>
+
+<script src="/proto.js"></script>
+<script>
+(function () {
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // fictional sample events
+  var EVENTS = [
+    { src: 'SEC 8-K', text: 'Halvern Bio discloses CFO departure effective 31 October', cat: 'Leadership change', ent: 'Halvern Bio', id: 'org_41907', conf: 0.97, n: 3, sum: 'CFO to step down 31 Oct. Interim CFO named from the finance team.' },
+    { src: 'Press release', text: 'Norvell Freight agrees to acquire Baltic operator Merivo', cat: 'M&A', ent: 'Norvell Freight', id: 'org_20331', conf: 0.99, n: 5, sum: 'Agreed acquisition of Merivo. Terms undisclosed, close expected Q1.' },
+    { src: 'Regulator', text: 'Competition authority opens phase 1 review of Corvane and Ostrel', cat: 'Regulatory', ent: 'Corvane', id: 'org_77812', conf: 0.94, n: 2, sum: 'Phase 1 merger review opened. Decision deadline in 25 working days.' },
+    { src: 'Job boards', text: 'Kestrix Robotics posts 38 engineering roles in Monterrey', cat: 'Expansion', ent: 'Kestrix Robotics', id: 'org_55104', conf: 0.88, n: 38, sum: 'Hiring cluster suggests a new Monterrey engineering site.' },
+    { src: 'Company blog', text: 'Arcton Energy pauses phase 2 of its Teesside plant', cat: 'Project delay', ent: 'Arcton Energy', id: 'org_13090', conf: 0.91, n: 2, sum: 'Phase 2 paused pending grid connection. No revised date given.' },
+    { src: 'Court docket', text: 'Patent infringement suit filed against Quillon Pay in Delaware', cat: 'Litigation', ent: 'Quillon Pay', id: 'org_66420', conf: 0.96, n: 1, sum: 'Patent suit filed in D. Del. covering tokenised payment flows.' },
+    { src: 'News wire', text: 'Fenmark Capital closes Fund IV at EUR 420m', cat: 'Fundraise', ent: 'Fenmark Capital', id: 'org_30871', conf: 0.98, n: 4, sum: 'Fund IV final close at EUR 420m, above the EUR 350m target.' },
+    { src: 'Pricing page', text: 'Tallis Cloud raises Pro tier list price by 12%', cat: 'Pricing change', ent: 'Tallis Cloud', id: 'org_48215', conf: 0.9, n: 1, sum: 'Pro tier list price up 12%. Enterprise tier unchanged.' }
+  ];
+  var NOISE = [
+    { src: 'Company site', text: 'Cookie policy page updated', why: 'no signal' },
+    { src: 'News wire', text: 'Syndicated copy of an earlier acquisition story', why: 'duplicate' },
+    { src: 'Social', text: 'Repost of a fund close announcement', why: 'duplicate' },
+    { src: 'Careers page', text: 'Layout change, no new content', why: 'no signal' }
+  ];
+
+  var inEl = document.getElementById('in'), clsEl = document.getElementById('cls');
+  var outEl = document.getElementById('out'), protoEl = document.getElementById('proto');
+  var t, tick = 0, ei = 0, ni = 0;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function hms(d) { return d.toISOString().slice(11, 19); }
+  function hex(n) { var s = ''; while (s.length < n) s += ((Math.random() * 16) | 0).toString(16); return s; }
+  function prepend(list, html, keep) {
+    list.insertAdjacentHTML('afterbegin', html);
+    while (list.children.length > keep) list.removeChild(list.lastChild);
+  }
+
+  function ingest(e, noise, time) {
+    prepend(inEl, '<li class="ev' + (noise ? ' ev--noise' : ' ev--hot') + '"><div class="ev__meta"><span>' + hms(time) + '</span><span>' + esc(e.src) + '</span>' +
+      (noise ? '<span class="ev__drop">dropped: ' + e.why + '</span>' : '') + '</div><div class="ev__text">' + esc(e.text) + '</div></li>', 8);
+    // only the newest real event keeps the blue marker
+    if (!noise) [].slice.call(inEl.querySelectorAll('.ev--hot')).slice(1).forEach(function (li) { li.classList.remove('ev--hot'); });
+  }
+
+  function classify(e) {
+    prepend(clsEl, '<li class="ev"><div class="ev__text">' + esc(e.ent) + '</div><div class="chips"><span class="chip chip--cat">' + esc(e.cat) +
+      '</span><span class="chip">' + e.id + '</span><span class="conf">' + e.conf.toFixed(2) + '</span></div></li>', 6);
+  }
+
+  function deliver(e, time, mcp) {
+    var k = function (s) { return '<span class="k">"' + s + '"</span>: '; };
+    var s = function (v) { return '<span class="s">"' + esc(v) + '"</span>'; };
+    var n = function (v) { return '<span class="n">' + v + '</span>'; };
+    var pad = mcp ? '  ' : '    ';
+    var body =
+      pad + k('id') + s('evt_' + hex(6)) + ',\n' +
+      pad + k('type') + s(e.cat.toLowerCase().replace(/[^a-z]+/g, '_')) + ',\n' +
+      pad + k('entity') + '{ ' + k('name') + s(e.ent) + ', ' + k('id') + s(e.id) + ' },\n' +
+      pad + k('summary') + s(e.sum) + ',\n' +
+      pad + k('confidence') + n(e.conf.toFixed(2)) + ',\n' +
+      pad + k('sources') + n(e.n) + ',\n' +
+      pad + k('detected_at') + s(time.toISOString().slice(0, 19) + 'Z') + '\n';
+    var html = mcp
+      ? '<span class="c">// tools/call</span>  <span class="v">sgnfai.get_events</span>\n<span class="c">// result</span>\n{\n' + body + '}'
+      : '<span class="v">GET</span> /v1/events?since=' + time.toISOString().slice(0, 16) + 'Z\n<span class="c">200 OK</span>\n{ ' + k('data') + '[{\n' + body + '  }]\n}';
+    outEl.innerHTML = '<div class="json">' + html + '</div>';
+    protoEl.textContent = mcp ? 'MCP' : 'REST API';
+  }
+
+  // one step: odd steps are noise that gets dropped, even steps are real events that flow through
+  function step(instant) {
+    tick++;
+    // pre-filled steps are back-dated, live ones use the clock
+    var time = instant ? (t = new Date(t.getTime() + 1000 + Math.random() * 3000)) : new Date();
+    if (tick % 2) { ingest(NOISE[ni++ % NOISE.length], true, time); return; }
+    var e = EVENTS[ei++ % EVENTS.length], mcp = (ei % 2) === 1;
+    ingest(e, false, time);
+    if (instant) { classify(e); deliver(e, time, mcp); return; }
+    setTimeout(function () { classify(e); }, 700);
+    setTimeout(function () { deliver(e, time, mcp); }, 1400);
+  }
+
+  // pre-fill so nothing starts empty, then run
+  document.body.classList.add('no-anim');
+  t = new Date(Date.now() - 30000);
+  for (var i = 0; i < 10; i++) step(true);
+  requestAnimationFrame(function () { document.body.classList.remove('no-anim'); });
+  if (!reduced) setInterval(function () { step(false); }, 1600);
+})();
+</script>
+</body>
+</html>

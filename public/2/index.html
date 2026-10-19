@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sgnfai · Prototype 2</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/proto.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+  /* Prototype 2: Swiss restraint. White field, huge wordmark, the blue as a structural block,
+     one quiet live element (an event timeline). */
+  body.p2 {
+    display: grid; min-height: 100vh;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 33vw);
+    grid-template-rows: 1fr auto;
+  }
+  .p2-main { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; padding: 24px var(--gutter) 8px; }
+  .p2 .foot { grid-column: 1; grid-row: 2; }
+
+  .p2-top { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--ink); }
+  .p2-top a:hover { color: var(--blue); }
+  @media (max-width: 600px) { .p2-top { flex-direction: column; gap: 6px; } }
+
+  .p2-hero { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 48px 0 40px; }
+  .p2-hero .logo { font-size: clamp(88px, 15.5vw, 250px); letter-spacing: -0.055em; margin-left: -0.04em; }
+  .p2-hero .lede { margin-top: 28px; max-width: 34ch; font-size: clamp(20px, 1.8vw, 26px); line-height: 1.35; font-weight: 500; letter-spacing: -0.01em; }
+
+  .steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
+  .steps li { padding: 14px 20px 20px 0; }
+  .steps li + li { padding-left: 20px; border-left: 1px solid var(--rule); }
+  .steps .mono-label { color: var(--blue); }
+  .steps b { display: block; margin: 10px 0 6px; font-size: 20px; letter-spacing: -0.01em; }
+  .steps p { font-size: 15px; line-height: 1.45; color: var(--ink-muted); }
+  @media (max-width: 720px) {
+    .steps { grid-template-columns: 1fr; }
+    .steps li, .steps li + li { padding: 14px 0 16px; border-left: 0; border-top: 1px solid var(--rule); }
+    .steps li:first-child { border-top: 0; }
+  }
+
+  .timeline { margin-top: 28px; }
+  .timeline canvas { display: block; width: 100%; height: 56px; }
+  .timeline__axis { display: flex; justify-content: space-between; margin-top: 6px; font: 11px/1 var(--font-mono); color: var(--ink-muted); }
+
+  /* the blue block: full height, bleeds to the top and right edges */
+  .p2-block {
+    grid-column: 2; grid-row: 1 / span 2;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 48px;
+    padding: 24px var(--gutter) 32px; background: var(--blue); color: var(--white);
+  }
+  .p2-block .btn { align-self: flex-end; }
+  .p2-block .tagline { flex-direction: column; font-size: clamp(30px, 3.3vw, 52px); line-height: 1.08; letter-spacing: -0.03em; gap: 0; }
+  .p2-block .tagline span, .p2-block .tagline span:first-child { padding: 0; border: 0; white-space: normal; }
+  .p2-block .contact { margin-top: 24px; font-size: 15px; opacity: 0.8; }
+  .p2-block .contact a { border-bottom: 1px solid currentColor; }
+
+  @media (max-width: 860px) {
+    body.p2 { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+    .p2-main { grid-row: 1; }
+    .p2-block { grid-column: 1; grid-row: 2; min-height: 70vw; }
+    .p2 .foot { grid-row: 3; }
+    .p2-hero { padding: 40px 0 32px; }
+  }
+</style>
+</head>
+<body class="p2">
+
+<main class="p2-main">
+  <div class="p2-top mono-label">
+    <a href="/">Sgnfai</a>
+    <span>Web intelligence infrastructure for data companies</span>
+  </div>
+
+  <section class="p2-hero">
+    <div class="logo" data-type-logo data-autoplay role="img" aria-label="Sgnfai"><span class="logo__word" aria-hidden="true">Sgnfai</span><span class="logo__cursor" aria-hidden="true"></span></div>
+    <p class="lede">Every alert detected, classified and synthesised, then delivered straight into your data product.</p>
+  </section>
+
+  <ol class="steps">
+    <li><span class="mono-label">01</span><b>Collect</b><p>Industrial-strength collection across the open web, filings and feeds.</p></li>
+    <li><span class="mono-label">02</span><b>Classify</b><p>Each alert de-duplicated, categorised and resolved to an entity as it lands.</p></li>
+    <li><span class="mono-label">03</span><b>Deliver</b><p>Structured events into your product via API or MCP.</p></li>
+  </ol>
+
+  <div class="timeline" aria-hidden="true">
+    <canvas id="tl"></canvas>
+    <div class="timeline__axis"><span>60s ago</span><span>Event stream, sample</span><span>now</span></div>
+  </div>
+</main>
+
+<aside class="p2-block">
+  <a class="btn btn--light" href="mailto:hello@sgnf.ai?subject=Request%20access">Request access</a>
+  <div>
+    <h1 class="tagline"><span>Our tools.</span><span>Your intelligence.</span><span>Their advantage.</span></h1>
+    <p class="contact"><a href="mailto:hello@sgnf.ai">hello@sgnf.ai</a></p>
+  </div>
+</aside>
+
+<footer class="foot">
+  <nav class="foot__nav" aria-label="Prototypes"><a href="/1/">1</a><span>|</span><a href="/2/" aria-current="page">2</a><span>|</span><a href="/3/">3</a></nav>
+  <span>&copy; 2026 Sgnfai</span>
+</footer>
+
+<script src="/proto.js"></script>
+<script>
+// Event timeline: a tick per incoming event, scrolling left over 60s. Most are ink; significant ones are blue and taller.
+(function () {
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cv = document.getElementById('tl'), ctx = cv.getContext('2d');
+  var W = 0, H = 0, dpr = 1, ticks = [], SPAN = 60, next = 0;
+
+  function size() {
+    W = cv.clientWidth; H = cv.clientHeight; dpr = Math.min(devicePixelRatio || 1, 2);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  }
+  function spawn(at) {
+    var hot = Math.random() < 0.12;
+    ticks.push({ t: at, h: hot ? 0.75 + Math.random() * 0.25 : 0.12 + Math.random() * Math.random() * 0.45, hot: hot });
+  }
+  function draw(now) {
+    if (!W) return;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    var base = H - 1;
+    ctx.fillStyle = '#111'; ctx.fillRect(0, base, W, 1);
+    for (var i = 0; i < ticks.length; i++) {
+      var k = ticks[i], x = W - ((now - k.t) / SPAN) * W;
+      if (x < 0) continue;
+      var h = Math.round(k.h * (H - 4));
+      ctx.fillStyle = k.hot ? '#153894' : 'rgba(17,17,17,0.55)';
+      ctx.fillRect(Math.round(x), base - h, k.hot ? 2 : 1, h);
+    }
+    ticks = ticks.filter(function (k) { return now - k.t < SPAN; });
+  }
+  function frame(ms) {
+    var now = ms / 1000;
+    while (next <= now) { spawn(next); next += 0.08 + Math.random() * 0.5; }
+    draw(now);
+    requestAnimationFrame(frame);
+  }
+
+  size();
+  addEventListener('resize', function () { size(); if (reduced) draw(now); });
+  // pre-fill the last 60s so the line starts full
+  var now = performance.now() / 1000;
+  for (var t = now - SPAN; t < now; t += 0.08 + Math.random() * 0.5) spawn(t);
+  next = now;
+  if (reduced) draw(now); else requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+/* Shared base for the three look-and-feel prototypes (/1/, /2/, /3/).
+   White, near-black, one blue. See ../sgnfai-look-and-feel.md */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white: #ffffff;
+  --ink: #111111;
+  --ink-muted: #555555;
+  --rule: #dcdcdc;
+  --blue: #153894;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --gutter: 32px;
+}
+@media (max-width: 640px) { :root { --gutter: 16px; } }
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  min-height: 100vh; display: flex; flex-direction: column;
+  background: var(--white); color: var(--ink);
+  font: 400 17px/1.5 var(--font-sans);
+}
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+/* blue top bar */
+.bar {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 16px var(--gutter);
+  background: var(--blue); color: var(--white);
+}
+.bar__logo { font-size: 24px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+
+/* rectangular CTAs */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 14px 22px; border: 1px solid var(--blue);
+  background: var(--blue); color: var(--white);
+  font: 600 15px/1 var(--font-sans); white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn:hover { background: var(--ink); border-color: var(--ink); }
+.btn--light { background: var(--white); color: var(--blue); border-color: var(--white); }
+.btn--light:hover { background: transparent; color: var(--white); border-color: var(--white); }
+.btn--sm { padding: 10px 16px; font-size: 14px; }
+
+.textlink { font-weight: 600; font-size: 15px; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+.textlink:hover { color: var(--blue); }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+
+/* typed logo: short sequence, Sgnfai -> Sgnf.ai -> Sgnfai (proto.js) */
+.logo {
+  position: relative; display: inline-block; align-self: flex-start;
+  font-weight: 700; letter-spacing: -0.045em; line-height: 1.05; height: 1.05em;
+  cursor: pointer;
+}
+.logo__word { white-space: pre; }
+.logo__cursor {
+  position: absolute; top: 0.1em; left: 100%;
+  width: 0.05em; min-width: 3px; height: 0.9em;
+  background: var(--blue); opacity: 0;
+}
+
+/* tagline with thin rules between the parts */
+.tagline { display: flex; flex-wrap: wrap; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+.tagline span { white-space: nowrap; padding-inline: 0.55em; border-left: 1px solid currentColor; }
+.tagline span:first-child { padding-left: 0; border-left: 0; }
+@media (max-width: 560px) {
+  .tagline { flex-direction: column; gap: 4px; }
+  .tagline span, .tagline span:first-child { padding: 0 0 0 10px; border-left: 1px solid currentColor; }
+}
+
+.mono-label { font: 600 12px/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* footer with the prototype switcher */
+.foot {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 16px var(--gutter); font-size: 13px; color: #8a8a8a;
+}
+.foot__nav { display: flex; gap: 10px; font: 600 13px/1 var(--font-mono); }
+.foot__nav a { padding: 4px 2px; }
+.foot__nav a:hover, .foot__nav a[aria-current] { color: var(--ink); }
+.foot__nav a[aria-current] { text-decoration: underline; text-underline-offset: 4px; }
+.foot--light { color: rgba(255, 255, 255, 0.6); }
+.foot--light .foot__nav a:hover, .foot--light .foot__nav a[aria-current] { color: var(--white); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

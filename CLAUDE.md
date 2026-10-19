@@ -8,6 +8,7 @@ Claude Code (edit locally) -> GitHub `AspolAdmin/sgnfai` (public, branch `main`)
 ## Layout
 - `public/` – the site (index.html, style.css, favicon.svg, signal-bg.js)
 - `public/signal-bg.js` – animated canvas background (noise + circuit pulses); all tunables in CONFIG at the top, `theme: 'dark' | 'light'`. It adds `signal-bg--dark/light` to <html>; theme overrides live at the end of style.css.
+- `public/1/`, `public/2/`, `public/3/` – look-and-feel prototypes (2026-10-19), linked from a "1 | 2 | 3" switcher bottom-left of the home page; share `public/proto.css` + `public/proto.js` (short 2.4s logo typing). 1 = pipeline demo as hero (fictional sample events), 2 = Swiss white + blue block + event timeline, 3 = blue field where dots sort into category bars. All `noindex`.
 - `.claude/launch.json` – local preview: `python3 -m http.server 8787 -d public`
 - `wrangler.jsonc` – Worker name, assets dir, custom domains
 
